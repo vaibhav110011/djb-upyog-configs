@@ -90,7 +90,7 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.auditDetails.createdTime
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
 
-        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode,latitude,longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);
           basePath: waterTankerBookingDetail.address
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.address.addressId
@@ -105,6 +105,8 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.address.locality
             - jsonPath: $.waterTankerBookingDetail.address.localityCode
             - jsonPath: $.waterTankerBookingDetail.address.pincode
+            - jsonPath: $.waterTankerBookingDetail.address.latitude
+            - jsonPath: $.waterTankerBookingDetail.address.longitude
 
         - query: INSERT INTO public.upyog_rs_water_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_water_tanker_booking_details WHERE booking_id = ?;
           basePath: waterTankerBookingDetail
