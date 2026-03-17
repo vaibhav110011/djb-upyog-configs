@@ -46,7 +46,7 @@ serviceMaps:
       fromTopic: create-water-tanker-booking
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.upyog_rs_water_tanker_booking_details(booking_id, booking_no, tenant_id, address_detail_id, mobile_number, tanker_type, water_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, locality_code, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, LEFT(?,64), ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_booking_details(booking_id, booking_no, tenant_id, address_detail_id, mobile_number, tanker_type, water_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, locality_code,wt_file_store_id, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, LEFT(?,64), ?, ?, ?, ?, ?, ?,?);
           basePath: waterTankerBookingDetail
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
@@ -71,6 +71,7 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingCreatedBy
             - jsonPath: $.waterTankerBookingDetail.bookingStatus
             - jsonPath: $.waterTankerBookingDetail.localityCode
+            - jsonPath: $.waterTankerBookingDetail.WTfileStoreId
             - jsonPath: $.waterTankerBookingDetail.auditDetails.createdBy
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedBy
             - jsonPath: $.waterTankerBookingDetail.auditDetails.createdTime
