@@ -69,7 +69,16 @@ serviceMaps:
             - jsonPath: $.vehicle.auditDetails.lastModifiedTime
             - jsonPath: $.vehicle.id
         
-        - query:  INSERT INTO eg_vehicle_driver_mapping(vehicle_id, driver_id, status) VALUES( ?, ?, ?);
+        - query: UPDATE eg_vehicle_driver_mapping SET status='INACTIVE'
+                WHERE vehicle_id=? AND status='ACTIVE'
+          basePath: vehicle
+          jsonMaps:
+            - jsonPath: $.vehicle.id
+
+        - query: INSERT INTO eg_vehicle_driver_mapping(vehicle_id, driver_id, status)
+                VALUES(?, ?, ?)
+                ON CONFLICT (vehicle_id, driver_id)
+                DO UPDATE SET status = EXCLUDED.status;
           basePath: vehicle
           jsonMaps:
             - jsonPath: $.vehicle.id
