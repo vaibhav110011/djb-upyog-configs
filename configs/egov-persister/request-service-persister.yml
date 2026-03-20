@@ -115,6 +115,91 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
 
     - version: 1.0
+      description: Persists water tanker application fixed point detail with user profile
+      fromTopic: create-fixed-point-water-tanker-booking-with-profile
+      isTransaction: true
+      queryMaps:
+        
+        - query: INSERT INTO public.upyog_rs_water_tanker_applicant_details(applicant_id, booking_id, name, mobile_number, email_id, alternate_number, createdby, lastModifiedby, createdtime, lastmodifiedtime, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: waterTankerBookingDetail.applicantDetail
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.applicantId
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.bookingId
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.name
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.mobileNumber
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.emailId
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.alternateNumber
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.createdBy
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.createdTime
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.type
+
+        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: waterTankerBookingDetail.address
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.address.addressId
+            - jsonPath: $.waterTankerBookingDetail.address.applicantId
+            - jsonPath: $.waterTankerBookingDetail.address.houseNo
+            - jsonPath: $.waterTankerBookingDetail.address.addressLine1
+            - jsonPath: $.waterTankerBookingDetail.address.addressLine2
+            - jsonPath: $.waterTankerBookingDetail.address.streetName
+            - jsonPath: $.waterTankerBookingDetail.address.landmark
+            - jsonPath: $.waterTankerBookingDetail.address.city
+            - jsonPath: $.waterTankerBookingDetail.address.cityCode
+            - jsonPath: $.waterTankerBookingDetail.address.locality
+            - jsonPath: $.waterTankerBookingDetail.address.localityCode
+            - jsonPath: $.waterTankerBookingDetail.address.pincode
+            - jsonPath: $.waterTankerBookingDetail.address.latitude
+            - jsonPath: $.waterTankerBookingDetail.address.longitude
+            - jsonPath: $.waterTankerBookingDetail.address.type
+
+        - query: INSERT INTO public.upyog_rs_water_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_water_tanker_booking_details WHERE booking_id = ?;
+          basePath: waterTankerBookingDetail
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.bookingId
+
+
+    - version: 1.0
+      description: Persists water tanker application fixed point detail
+      fromTopic: create-fixed-point-water-tanker-booking
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO public.upyog_rs_water_tanker_applicant_details(applicant_id, booking_id, name, mobile_number, email_id, alternate_number, createdby, lastModifiedby, createdtime, lastmodifiedtime,type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: waterTankerBookingDetail.applicantDetail
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.applicantId
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.bookingId
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.name
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.mobileNumber
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.emailId
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.alternateNumber
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.createdBy
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.createdTime
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.type
+
+        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode,latitude,longitude, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?, ?);
+          basePath: waterTankerBookingDetail.address
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.address.addressId
+            - jsonPath: $.waterTankerBookingDetail.address.applicantId
+            - jsonPath: $.waterTankerBookingDetail.address.houseNo
+            - jsonPath: $.waterTankerBookingDetail.address.addressLine1
+            - jsonPath: $.waterTankerBookingDetail.address.addressLine2
+            - jsonPath: $.waterTankerBookingDetail.address.streetName
+            - jsonPath: $.waterTankerBookingDetail.address.landmark
+            - jsonPath: $.waterTankerBookingDetail.address.city
+            - jsonPath: $.waterTankerBookingDetail.address.cityCode
+            - jsonPath: $.waterTankerBookingDetail.address.locality
+            - jsonPath: $.waterTankerBookingDetail.address.localityCode
+            - jsonPath: $.waterTankerBookingDetail.address.pincode
+            - jsonPath: $.waterTankerBookingDetail.address.latitude
+            - jsonPath: $.waterTankerBookingDetail.address.longitude
+            - jsonPath: $.waterTankerBookingDetail.address.type
+
+    - version: 1.0
       description: Update water tanker application detail
       fromTopic: update-water-tanker-booking
       isTransaction: true
