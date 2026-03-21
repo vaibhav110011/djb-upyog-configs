@@ -414,3 +414,52 @@ serviceMaps:
           basePath: mobileToiletBookingDetail
           jsonMaps:
             - jsonPath: $.mobileToiletBookingDetail.bookingId
+
+
+
+            
+
+    - version: 1.0
+      description: Persists filling point details
+      fromTopic: save-filling-point
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO public.upyog_rs_water_tanker_filling_point(id, tenant_id, filling_point_name, emergency_name, ee_name, ee_email, ee_mobile, ae_name, ae_email, ae_mobile, je_name, je_email, je_mobile, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: fillingPoint
+          jsonMaps:
+            - jsonPath: $.fillingPoint.id
+            - jsonPath: $.fillingPoint.tenantId
+            - jsonPath: $.fillingPoint.fillingPointName
+            - jsonPath: $.fillingPoint.emergencyName
+            - jsonPath: $.fillingPoint.eeName
+            - jsonPath: $.fillingPoint.eeEmail
+            - jsonPath: $.fillingPoint.eeMobile
+            - jsonPath: $.fillingPoint.aeName
+            - jsonPath: $.fillingPoint.aeEmail
+            - jsonPath: $.fillingPoint.aeMobile
+            - jsonPath: $.fillingPoint.jeName
+            - jsonPath: $.fillingPoint.jeEmail
+            - jsonPath: $.fillingPoint.jeMobile
+            - jsonPath: $.fillingPoint.createdBy
+            - jsonPath: $.fillingPoint.lastModifiedBy
+            - jsonPath: $.fillingPoint.createdTime
+            - jsonPath: $.fillingPoint.lastModifiedTime
+
+        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(filling_point_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type) VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: fillingPoint
+          jsonMaps:
+            - jsonPath: $.fillingPoint.address.fillingPointId
+            - jsonPath: $.fillingPoint.id
+            - jsonPath: $.fillingPoint.address.houseNo
+            - jsonPath: $.fillingPoint.address.addressLine1
+            - jsonPath: $.fillingPoint.address.addressLine2
+            - jsonPath: $.fillingPoint.address.streetName
+            - jsonPath: $.fillingPoint.address.landmark
+            - jsonPath: $.fillingPoint.address.city
+            - jsonPath: $.fillingPoint.address.cityCode
+            - jsonPath: $.fillingPoint.address.locality
+            - jsonPath: $.fillingPoint.address.localityCode
+            - jsonPath: $.fillingPoint.address.pincode
+            - jsonPath: $.fillingPoint.address.latitude
+            - jsonPath: $.fillingPoint.address.longitude
+            - jsonPath: $.fillingPoint.address.type
