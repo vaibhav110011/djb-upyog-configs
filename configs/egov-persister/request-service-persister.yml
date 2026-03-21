@@ -200,6 +200,72 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.address.type
 
     - version: 1.0
+      description: Updates fixed point water tanker booking with user profile
+      fromTopic: update-fixed-point-water-tanker-booking-with-profile
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE public.upyog_rs_water_tanker_applicant_details SET name=?, mobile_number=?, email_id=?, alternate_number=?, lastModifiedby=?, lastmodifiedtime=? WHERE applicant_id=?;
+          basePath: waterTankerBookingDetail.applicantDetail
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.name
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.mobileNumber
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.emailId
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.alternateNumber
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.applicantId
+
+        - query: UPDATE public.upyog_rs_water_tanker_address_details SET house_no=?, address_line_1=?, address_line_2=?, street_name=?, landmark=?, city=?, city_code=?, locality=?, locality_code=?, pincode=?, latitude=?, longitude=? WHERE applicant_id=?;
+          basePath: waterTankerBookingDetail.address
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.address.houseNo
+            - jsonPath: $.waterTankerBookingDetail.address.addressLine1
+            - jsonPath: $.waterTankerBookingDetail.address.addressLine2
+            - jsonPath: $.waterTankerBookingDetail.address.streetName
+            - jsonPath: $.waterTankerBookingDetail.address.landmark
+            - jsonPath: $.waterTankerBookingDetail.address.city
+            - jsonPath: $.waterTankerBookingDetail.address.cityCode
+            - jsonPath: $.waterTankerBookingDetail.address.locality
+            - jsonPath: $.waterTankerBookingDetail.address.localityCode
+            - jsonPath: $.waterTankerBookingDetail.address.pincode
+            - jsonPath: $.waterTankerBookingDetail.address.latitude
+            - jsonPath: $.waterTankerBookingDetail.address.longitude
+            - jsonPath: $.waterTankerBookingDetail.address.applicantId
+
+    - version: 1.0
+      description: Updates fixed point water tanker booking (no profile)
+      fromTopic: update-fixed-point-water-tanker-booking
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE public.upyog_rs_water_tanker_applicant_details SET name=?, mobile_number=?, email_id=?, alternate_number=?, lastModifiedby=?, lastmodifiedtime=? WHERE applicant_id=?;
+          basePath: waterTankerBookingDetail.applicantDetail
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.name
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.mobileNumber
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.emailId
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.alternateNumber
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.applicantId
+
+        - query: UPDATE public.upyog_rs_water_tanker_address_details SET house_no=?, address_line_1=?, address_line_2=?, street_name=?, landmark=?, city=?, city_code=?, locality=?, locality_code=?, pincode=?, latitude=?, longitude=? WHERE applicant_id=?;
+          basePath: waterTankerBookingDetail.address
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.address.houseNo
+            - jsonPath: $.waterTankerBookingDetail.address.addressLine1
+            - jsonPath: $.waterTankerBookingDetail.address.addressLine2
+            - jsonPath: $.waterTankerBookingDetail.address.streetName
+            - jsonPath: $.waterTankerBookingDetail.address.landmark
+            - jsonPath: $.waterTankerBookingDetail.address.city
+            - jsonPath: $.waterTankerBookingDetail.address.cityCode
+            - jsonPath: $.waterTankerBookingDetail.address.locality
+            - jsonPath: $.waterTankerBookingDetail.address.localityCode
+            - jsonPath: $.waterTankerBookingDetail.address.pincode
+            - jsonPath: $.waterTankerBookingDetail.address.latitude
+            - jsonPath: $.waterTankerBookingDetail.address.longitude
+            - jsonPath: $.waterTankerBookingDetail.address.applicantId
+
+    - version: 1.0
       description: Update water tanker application detail
       fromTopic: update-water-tanker-booking
       isTransaction: true
