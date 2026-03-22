@@ -465,4 +465,95 @@ serviceMaps:
             - jsonPath: $.fillingPoint.address.type
 
 
+    - version: 1.0
+      description: Save Fixed Point Time Table (7 rows per schedule ID)
+      fromTopic: save-fixed-point-time-table
+      isTransaction: true
+      queryMaps:
+
+        - query: >
+            INSERT INTO eg_fixed_point_time_table (
+              system_assigned_schedule_id,
+              fixed_point_code,
+              day,
+              trip_no,
+              arrival_time_to_fpl,
+              departure_time_from_fpl,
+              arrival_time_delivery_point,
+              departure_time_delivery_point,
+              time_of_arriving_back_fpl_after_delivery,
+              volume_water_tobe_delivery,
+              active,
+              is_enable,
+              remarks,
+              vehicle_id,
+              createdby,
+              lastmodifiedby,
+              createdtime,
+              lastmodifiedtime
+            ) VALUES (
+              ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+            )
+          basePath: fixedPointDetailsList.*
+          jsonMaps:
+            - jsonPath: $.fixedPointDetailsList.*.system_assigned_schedule_id
+            - jsonPath: $.fixedPointDetailsList.*.fixed_point_code
+            - jsonPath: $.fixedPointDetailsList.*.day
+            - jsonPath: $.fixedPointDetailsList.*.trip_no
+            - jsonPath: $.fixedPointDetailsList.*.arrival_time_to_fpl
+            - jsonPath: $.fixedPointDetailsList.*.departure_time_from_fpl
+            - jsonPath: $.fixedPointDetailsList.*.arrival_time_delivery_point
+            - jsonPath: $.fixedPointDetailsList.*.departure_time_delivery_point
+            - jsonPath: $.fixedPointDetailsList.*.time_of_arriving_back_fpl_after_delivery
+            - jsonPath: $.fixedPointDetailsList.*.volume_water_tobe_delivery
+            - jsonPath: $.fixedPointDetailsList.*.active
+            - jsonPath: $.fixedPointDetailsList.*.is_enable
+            - jsonPath: $.fixedPointDetailsList.*.remarks
+            - jsonPath: $.fixedPointDetailsList.*.vehicle_id
+            - jsonPath: $.fixedPointDetailsList.*.audit_details.createdBy
+            - jsonPath: $.fixedPointDetailsList.*.audit_details.lastModifiedBy
+            - jsonPath: $.fixedPointDetailsList.*.audit_details.createdTime
+            - jsonPath: $.fixedPointDetailsList.*.audit_details.lastModifiedTime
+
+    - version: 1.0
+      description: Update Fixed Point Time Table
+      fromTopic: update-fixed-point-time-table
+      isTransaction: true
+      queryMaps:
+
+        - query: >
+            UPDATE eg_fixed_point_time_table SET
+              fixed_point_code = ?,
+              trip_no = ?,
+              arrival_time_to_fpl = ?,
+              departure_time_from_fpl = ?,
+              arrival_time_delivery_point = ?,
+              departure_time_delivery_point = ?,
+              time_of_arriving_back_fpl_after_delivery = ?,
+              volume_water_tobe_delivery = ?,
+              active = ?,
+              is_enable = ?,
+              remarks = ?,
+              vehicle_id = ?,
+              lastmodifiedby = ?,
+              lastmodifiedtime = ?
+            WHERE system_assigned_schedule_id = ?
+          basePath: fixedPointDetailsList.*
+          jsonMaps:
+            - jsonPath: $.fixedPointDetailsList.*.fixed_point_code
+            - jsonPath: $.fixedPointDetailsList.*.trip_no
+            - jsonPath: $.fixedPointDetailsList.*.arrival_time_to_fpl
+            - jsonPath: $.fixedPointDetailsList.*.departure_time_from_fpl
+            - jsonPath: $.fixedPointDetailsList.*.arrival_time_delivery_point
+            - jsonPath: $.fixedPointDetailsList.*.departure_time_delivery_point
+            - jsonPath: $.fixedPointDetailsList.*.time_of_arriving_back_fpl_after_delivery
+            - jsonPath: $.fixedPointDetailsList.*.volume_water_tobe_delivery
+            - jsonPath: $.fixedPointDetailsList.*.active
+            - jsonPath: $.fixedPointDetailsList.*.is_enable
+            - jsonPath: $.fixedPointDetailsList.*.remarks
+            - jsonPath: $.fixedPointDetailsList.*.vehicle_id
+            - jsonPath: $.fixedPointDetailsList.*.audit_details.lastModifiedBy
+            - jsonPath: $.fixedPointDetailsList.*.audit_details.lastModifiedTime
+            - jsonPath: $.fixedPointDetailsList.*.system_assigned_schedule_id
+
             
