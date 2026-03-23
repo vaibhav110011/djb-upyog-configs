@@ -487,12 +487,13 @@ serviceMaps:
               is_enable,
               remarks,
               vehicle_id,
+              tenant_id,
               createdby,
               lastmodifiedby,
               createdtime,
               lastmodifiedtime
             ) VALUES (
-              ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+              ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
           basePath: fixedPointDetailsList.*
           jsonMaps:
@@ -510,10 +511,12 @@ serviceMaps:
             - jsonPath: $.fixedPointDetailsList.*.is_enable
             - jsonPath: $.fixedPointDetailsList.*.remarks
             - jsonPath: $.fixedPointDetailsList.*.vehicle_id
+            - jsonPath: $.fixedPointDetailsList.*.tenant_id
             - jsonPath: $.fixedPointDetailsList.*.audit_details.createdBy
             - jsonPath: $.fixedPointDetailsList.*.audit_details.lastModifiedBy
             - jsonPath: $.fixedPointDetailsList.*.audit_details.createdTime
             - jsonPath: $.fixedPointDetailsList.*.audit_details.lastModifiedTime
+
 
     - version: 1.0
       description: Update Fixed Point Time Table
