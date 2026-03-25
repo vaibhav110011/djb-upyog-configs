@@ -120,7 +120,7 @@ serviceMaps:
       isTransaction: true
       queryMaps:
         
-        - query: INSERT INTO public.upyog_rs_water_tanker_applicant_details(applicant_id, booking_id, name, mobile_number, email_id, alternate_number, createdby, lastModifiedby, createdtime, lastmodifiedtime, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_applicant_details(applicant_id, booking_id, name, mobile_number, email_id, alternate_number, createdby, lastModifiedby, createdtime, lastmodifiedtime, type, fixed_point_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: waterTankerBookingDetail.applicantDetail
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.applicantDetail.applicantId
@@ -134,6 +134,8 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.auditDetails.createdTime
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
             - jsonPath: $.waterTankerBookingDetail.applicantDetail.type
+            - jsonPath: $.waterTankerBookingDetail.applicantDetail.fixedPointId
+
 
         - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: waterTankerBookingDetail.address
@@ -424,7 +426,7 @@ serviceMaps:
       fromTopic: save-filling-point
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.upyog_rs_water_tanker_filling_point(id, tenant_id, filling_point_name, emergency_name, ee_name, ee_email, ee_mobile, ae_name, ae_email, ae_mobile, je_name, je_email, je_mobile, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_filling_point(id, tenant_id, filling_point_name, emergency_name, ee_name, ee_email, ee_mobile, ae_name, ae_email, ae_mobile, je_name, je_email, je_mobile, createdby, lastmodifiedby, createdtime, lastmodifiedtime, filling_point_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: fillingPoint
           jsonMaps:
             - jsonPath: $.fillingPoint.id
@@ -444,6 +446,7 @@ serviceMaps:
             - jsonPath: $.fillingPoint.lastModifiedBy
             - jsonPath: $.fillingPoint.createdTime
             - jsonPath: $.fillingPoint.lastModifiedTime
+            - jsonPath: $.fillingPoint.fillingPointId
 
         - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type) VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: fillingPoint
@@ -463,6 +466,7 @@ serviceMaps:
             - jsonPath: $.fillingPoint.address.latitude
             - jsonPath: $.fillingPoint.address.longitude
             - jsonPath: $.fillingPoint.address.type
+            
 
 
     - version: 1.0
