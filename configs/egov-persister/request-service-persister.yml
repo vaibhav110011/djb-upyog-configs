@@ -647,4 +647,27 @@ serviceMaps:
             - jsonPath: $.FillingPointLocality.*.fillingPointId      
             - jsonPath: $.FillingPointLocality.*.auditDetails.lastModifiedBy
             - jsonPath: $.FillingPointLocality.*.auditDetails.lastModifiedTime
-            - jsonPath: $.FillingPointLocality.*.localityCode        
+            - jsonPath: $.FillingPointLocality.*.localityCode
+            
+            
+    - version: 1.0
+      description: Persister config for filling point vendor mapping
+      fromTopic: save-filling-point-vendor-mapping
+      isTransaction: true
+      queryMaps:
+
+        - query: >
+            INSERT INTO eg_wt_fillingpoint_vendor_map
+            (id, tenant_id, filling_point_id, vendor_id, createdby, lastmodifiedby, createdtime, lastmodifiedtime)
+            VALUES (CAST(? AS UUID), ?, CAST(? AS UUID), CAST(? AS UUID), ?, ?, ?, ?);
+
+          basePath: $.mappings.*
+          jsonMaps:
+            - jsonPath: $.mappings.*.id
+            - jsonPath: $.mappings.*.tenantId
+            - jsonPath: $.mappings.*.fillingPointId
+            - jsonPath: $.mappings.*.vendorId
+            - jsonPath: $.mappings.*.auditDetails.createdBy
+            - jsonPath: $.mappings.*.auditDetails.lastModifiedBy
+            - jsonPath: $.mappings.*.auditDetails.createdTime
+            - jsonPath: $.mappings.*.auditDetails.lastModifiedTime
