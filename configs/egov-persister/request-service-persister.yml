@@ -606,3 +606,45 @@ serviceMaps:
             - jsonPath: $.fillingPoint.id        
 
             
+
+    - version: 1.0.0
+      description: Save filling point to locality mapping
+      fromTopic: save-filling-point-locality
+      isBatch: true
+      queryMaps:
+        - query: >
+            INSERT INTO filling_point_locality_mapping (
+              filling_point_id, 
+              locality_code, 
+              createdby, 
+              lastmodifiedby, 
+              createdtime,
+              lastmodifiedtime
+            ) VALUES (?, ?, ?, ?, ?, ?)
+          basePath: FillingPointLocality.*
+          jsonMaps:
+            - jsonPath: $.FillingPointLocality.*.fillingPointId
+            - jsonPath: $.FillingPointLocality.*.localityCode
+            - jsonPath: $.FillingPointLocality.*.auditDetails.createdBy
+            - jsonPath: $.FillingPointLocality.*.auditDetails.lastModifiedBy
+            - jsonPath: $.FillingPointLocality.*.auditDetails.createdTime
+            - jsonPath: $.FillingPointLocality.*.auditDetails.lastModifiedTime
+
+    - version: 1.0.0
+      description: Change Filling Point for a specific Locality
+      fromTopic: update-filling-point-locality
+      isTransaction: true
+      queryMaps:
+        - query: >
+            UPDATE filling_point_locality_mapping 
+            SET 
+              filling_point_id = ?, 
+              lastmodifiedby = ?, 
+              lastmodifiedtime = ? 
+            WHERE locality_code = ?
+          basePath: FillingPointLocality.*
+          jsonMaps:
+            - jsonPath: $.FillingPointLocality.*.fillingPointId      
+            - jsonPath: $.FillingPointLocality.*.auditDetails.lastModifiedBy
+            - jsonPath: $.FillingPointLocality.*.auditDetails.lastModifiedTime
+            - jsonPath: $.FillingPointLocality.*.localityCode        
