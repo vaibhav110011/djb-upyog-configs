@@ -91,7 +91,7 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.auditDetails.createdTime
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
 
-        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode,latitude,longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode,latitude,longitude, ward, zone, constituency) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?);
           basePath: waterTankerBookingDetail.address
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.address.addressId
@@ -108,6 +108,9 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.address.pincode
             - jsonPath: $.waterTankerBookingDetail.address.latitude
             - jsonPath: $.waterTankerBookingDetail.address.longitude
+            - jsonPath: $.waterTankerBookingDetail.address.ward
+            - jsonPath: $.waterTankerBookingDetail.address.zone
+            - jsonPath: $.waterTankerBookingDetail.address.constituency
 
         - query: INSERT INTO public.upyog_rs_water_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_water_tanker_booking_details WHERE booking_id = ?;
           basePath: waterTankerBookingDetail
@@ -137,7 +140,7 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.applicantDetail.fixedPointId
 
 
-        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type, ward, zone, constituency) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: waterTankerBookingDetail.address
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.address.addressId
@@ -155,6 +158,9 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.address.latitude
             - jsonPath: $.waterTankerBookingDetail.address.longitude
             - jsonPath: $.waterTankerBookingDetail.address.type
+            - jsonPath: $.waterTankerBookingDetail.address.ward
+            - jsonPath: $.waterTankerBookingDetail.address.zone
+            - jsonPath: $.waterTankerBookingDetail.address.constituency
 
         - query: INSERT INTO public.upyog_rs_water_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_water_tanker_booking_details WHERE booking_id = ?;
           basePath: waterTankerBookingDetail
@@ -182,7 +188,7 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
             - jsonPath: $.waterTankerBookingDetail.applicantDetail.type
 
-        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode,latitude,longitude, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode,latitude,longitude, type, ward, zone, constituency) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?, ?, ?, ?, ?);
           basePath: waterTankerBookingDetail.address
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.address.addressId
@@ -200,6 +206,9 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.address.latitude
             - jsonPath: $.waterTankerBookingDetail.address.longitude
             - jsonPath: $.waterTankerBookingDetail.address.type
+            - jsonPath: $.waterTankerBookingDetail.address.ward
+            - jsonPath: $.waterTankerBookingDetail.address.zone
+            - jsonPath: $.waterTankerBookingDetail.address.constituency
 
     - version: 1.0
       description: Updates fixed point water tanker booking with user profile
@@ -217,7 +226,7 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
             - jsonPath: $.waterTankerBookingDetail.applicantDetail.applicantId
 
-        - query: UPDATE public.upyog_rs_water_tanker_address_details SET house_no=?, address_line_1=?, address_line_2=?, street_name=?, landmark=?, city=?, city_code=?, locality=?, locality_code=?, pincode=?, latitude=?, longitude=? WHERE applicant_id=?;
+        - query: UPDATE public.upyog_rs_water_tanker_address_details SET house_no=?, address_line_1=?, address_line_2=?, street_name=?, landmark=?, city=?, city_code=?, locality=?, locality_code=?, pincode=?, latitude=?, longitude=?, ward=?, zone=?, constituency=? WHERE applicant_id=?;
           basePath: waterTankerBookingDetail.address
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.address.houseNo
@@ -232,6 +241,9 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.address.pincode
             - jsonPath: $.waterTankerBookingDetail.address.latitude
             - jsonPath: $.waterTankerBookingDetail.address.longitude
+            - jsonPath: $.waterTankerBookingDetail.address.ward
+            - jsonPath: $.waterTankerBookingDetail.address.zone
+            - jsonPath: $.waterTankerBookingDetail.address.constituency
             - jsonPath: $.waterTankerBookingDetail.address.applicantId
 
     - version: 1.0
@@ -250,7 +262,7 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
             - jsonPath: $.waterTankerBookingDetail.applicantDetail.applicantId
 
-        - query: UPDATE public.upyog_rs_water_tanker_address_details SET house_no=?, address_line_1=?, address_line_2=?, street_name=?, landmark=?, city=?, city_code=?, locality=?, locality_code=?, pincode=?, latitude=?, longitude=? WHERE applicant_id=?;
+        - query: UPDATE public.upyog_rs_water_tanker_address_details SET house_no=?, address_line_1=?, address_line_2=?, street_name=?, landmark=?, city=?, city_code=?, locality=?, locality_code=?, pincode=?, latitude=?, longitude=?, ward=?, zone=?, constituency=? WHERE applicant_id=?;
           basePath: waterTankerBookingDetail.address
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.address.houseNo
@@ -265,6 +277,9 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.address.pincode
             - jsonPath: $.waterTankerBookingDetail.address.latitude
             - jsonPath: $.waterTankerBookingDetail.address.longitude
+            - jsonPath: $.waterTankerBookingDetail.address.ward
+            - jsonPath: $.waterTankerBookingDetail.address.zone
+            - jsonPath: $.waterTankerBookingDetail.address.constituency
             - jsonPath: $.waterTankerBookingDetail.address.applicantId
 
     - version: 1.0
@@ -448,7 +463,7 @@ serviceMaps:
             - jsonPath: $.fillingPoint.lastModifiedTime
             - jsonPath: $.fillingPoint.fillingPointId
 
-        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type) VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode, latitude, longitude, type, ward, zone, constituency) VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,? ,? ,?);
           basePath: fillingPoint
           jsonMaps:
             - jsonPath: $.fillingPoint.address.addressId
@@ -466,6 +481,9 @@ serviceMaps:
             - jsonPath: $.fillingPoint.address.latitude
             - jsonPath: $.fillingPoint.address.longitude
             - jsonPath: $.fillingPoint.address.type
+            - jsonPath: $.fillingPoint.address.ward
+            - jsonPath: $.fillingPoint.address.zone
+            - jsonPath: $.fillingPoint.address.constituency
             
 
 
@@ -532,6 +550,7 @@ serviceMaps:
             UPDATE eg_fixed_point_time_table SET
               fixed_point_code = ?,
               trip_no = ?,
+              fixed_point_code=?,
               arrival_time_to_fpl = ?,
               departure_time_from_fpl = ?,
               arrival_time_delivery_point = ?,
@@ -549,6 +568,7 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.fixedPointDetailsList.*.fixed_point_code
             - jsonPath: $.fixedPointDetailsList.*.trip_no
+            - jsonPath: $.fixedPointDetailsList.*.fixed_point_code
             - jsonPath: $.fixedPointDetailsList.*.arrival_time_to_fpl
             - jsonPath: $.fixedPointDetailsList.*.departure_time_from_fpl
             - jsonPath: $.fixedPointDetailsList.*.arrival_time_delivery_point
