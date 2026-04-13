@@ -43,7 +43,7 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.vehicle.id
             
-        - query : UPDATE eg_vehicle SET tenantId=?, registrationNumber=?, model=?, type=?, tankCapicity=?, suctionType=?, pollutionCertiValidTill=?, InsuranceCertValidTill=?, fitnessValidTill=?, roadTaxPaidTill=?, gpsEnabled=?, source=?, status=?, additionalDetails=?, owner_id =?, createdBy=?, lastModifiedBy=?, createdTime=?, lastModifiedTime=? WHERE id=?
+        - query : UPDATE eg_vehicle SET tenantId=?, registrationNumber=?, model=?, type=?, tankCapicity=?, suctionType=?, pollutionCertiValidTill=?, InsuranceCertValidTill=?, fitnessValidTill=?, roadTaxPaidTill=?, gpsEnabled=?, source=?, status=?, additionalDetails=?, owner_id =?, createdBy=?, lastModifiedBy=?, createdTime=?, lastModifiedTime=?, filling_point_id=? WHERE id=?
           basePath: vehicle
           jsonMaps:
             - jsonPath: $.vehicle.tenantId
@@ -67,6 +67,7 @@ serviceMaps:
             - jsonPath: $.vehicle.auditDetails.lastModifiedBy
             - jsonPath: $.vehicle.auditDetails.createdTime
             - jsonPath: $.vehicle.auditDetails.lastModifiedTime
+            - jsonPath: $.vehicle.fillingPoint.fillingStationId
             - jsonPath: $.vehicle.id
         
         - query: UPDATE eg_vehicle_driver_mapping SET status='INACTIVE'
