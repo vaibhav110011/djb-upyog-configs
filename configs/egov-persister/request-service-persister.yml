@@ -48,7 +48,36 @@ serviceMaps:
       fromTopic: create-water-tanker-booking
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.upyog_rs_water_tanker_booking_details(booking_id, booking_no, tenant_id, address_detail_id, mobile_number, tanker_type, water_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, locality_code,wt_file_store_id, createdby, lastModifiedby, createdtime, lastmodifiedtime, applicant_id, filling_point_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, LEFT(?,64), ?, ?, ?, ?, ?, ?,?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_water_tanker_booking_details(booking_id, booking_no, tenant_id, address_detail_id, mobile_number, tanker_type, water_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, locality_code,wt_file_store_id, createdby, lastModifiedby, createdtime, lastmodifiedtime,applicant_id,filling_point_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, LEFT(?,64), ?, ?, ?, ?, ?, ?,?,?,?)
+            ON CONFLICT (booking_id)
+            DO UPDATE SET
+            booking_no = EXCLUDED.booking_no,
+            tenant_id = EXCLUDED.tenant_id,
+            address_detail_id = EXCLUDED.address_detail_id,
+            mobile_number = EXCLUDED.mobile_number,
+            tanker_type = EXCLUDED.tanker_type,
+            water_type = EXCLUDED.water_type,
+            tanker_quantity = EXCLUDED.tanker_quantity,
+            water_quantity = EXCLUDED.water_quantity,
+            description = EXCLUDED.description,
+            applicant_uuid = EXCLUDED.applicant_uuid,
+            delivery_date = EXCLUDED.delivery_date,
+            delivery_time = EXCLUDED.delivery_time,
+            extra_charge = EXCLUDED.extra_charge,
+            vendor_id = EXCLUDED.vendor_id,
+            vehicle_id = EXCLUDED.vehicle_id,
+            driver_id = EXCLUDED.driver_id,
+            vehicle_type = EXCLUDED.vehicle_type,
+            vehicle_capacity = EXCLUDED.vehicle_capacity,
+            booking_createdby = EXCLUDED.booking_createdby,
+            booking_status = EXCLUDED.booking_status,
+            locality_code = EXCLUDED.locality_code,
+            wt_file_store_id = EXCLUDED.wt_file_store_id,
+            lastModifiedby = EXCLUDED.lastModifiedby,
+            lastmodifiedtime = EXCLUDED.lastmodifiedtime,
+            applicant_id = EXCLUDED.applicant_id,
+            filling_point_id=EXCLUDED.filling_point_id;
+
           basePath: waterTankerBookingDetail
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
@@ -162,7 +191,7 @@ serviceMaps:
       fromTopic: create-fixed-point-water-tanker-booking-with-profile
       isTransaction: true
       queryMaps:
-        
+
         - query: INSERT INTO public.upyog_rs_water_tanker_applicant_details(applicant_id, booking_id, name, mobile_number, email_id, alternate_number, createdby, lastModifiedby, createdtime, lastmodifiedtime, type, fixed_point_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: waterTankerBookingDetail.applicantDetail
           jsonMaps:
@@ -346,7 +375,7 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
 
-    
+
     - version: 1.0
       description: Persists mobile toilet booking detail
       fromTopic: create-mobile-toilet-booking-with-profile
@@ -377,7 +406,7 @@ serviceMaps:
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedBy
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.createdTime
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedTime
-        
+
         - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details_auditdetails SELECT * FROM public.upyog_rs_mobile_toilet_booking_details WHERE booking_id = ?;
           basePath: mobileToiletBookingDetail
           jsonMaps:
@@ -443,7 +472,7 @@ serviceMaps:
             - jsonPath: $.mobileToiletBookingDetail.address.locality
             - jsonPath: $.mobileToiletBookingDetail.address.localityCode
             - jsonPath: $.mobileToiletBookingDetail.address.pincode
-        
+
         - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details_auditdetails SELECT * FROM public.upyog_rs_mobile_toilet_booking_details WHERE booking_id = ?;
           basePath: mobileToiletBookingDetail
           jsonMaps:
@@ -475,7 +504,7 @@ serviceMaps:
 
 
 
-     
+
 
     - version: 1.0
       description: Persists filling point details
@@ -525,7 +554,7 @@ serviceMaps:
             - jsonPath: $.fillingPoint.address.ward
             - jsonPath: $.fillingPoint.address.zone
             - jsonPath: $.fillingPoint.address.constituency
-            
+
 
 
     - version: 1.0
@@ -622,7 +651,7 @@ serviceMaps:
             - jsonPath: $.fixedPointDetailsList.*.audit_details.lastModifiedTime
             - jsonPath: $.fixedPointDetailsList.*.system_assigned_schedule_id
 
-            
+
     - version: 1.0
       description: Update filling point details
       fromTopic: update-filling-point
@@ -662,9 +691,9 @@ serviceMaps:
             - jsonPath: $.fillingPoint.address.latitude
             - jsonPath: $.fillingPoint.address.longitude
             - jsonPath: $.fillingPoint.address.type
-            - jsonPath: $.fillingPoint.id        
+            - jsonPath: $.fillingPoint.id
 
-            
+
 
     - version: 1.0.0
       description: Save filling point to locality mapping
@@ -703,12 +732,12 @@ serviceMaps:
             WHERE locality_code = ?
           basePath: FillingPointLocality.*
           jsonMaps:
-            - jsonPath: $.FillingPointLocality.*.fillingPointId      
+            - jsonPath: $.FillingPointLocality.*.fillingPointId
             - jsonPath: $.FillingPointLocality.*.auditDetails.lastModifiedBy
             - jsonPath: $.FillingPointLocality.*.auditDetails.lastModifiedTime
             - jsonPath: $.FillingPointLocality.*.localityCode
-            
-            
+
+
     - version: 1.0
       description: Persister config for filling point vendor mapping
       fromTopic: save-filling-point-vendor-mapping
