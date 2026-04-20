@@ -9,9 +9,9 @@ SearchDefinitions:
         baseQuery: |
           SELECT row_to_json(result) FROM (
             SELECT DISTINCT ad.booking_id, pi.createdtime
-            FROM upyog_rs_water_tanker_applicant_details ad
+            FROM upyog_rs_water_tanker_booking_details ad
             INNER JOIN eg_wf_processinstance_v2 pi 
-              ON pi.businessid = ad.booking_id
+              ON pi.businessid = ad.booking_no
             LEFT JOIN eg_wf_assignee_v2 assg 
               ON pi.id = assg.processinstanceid
             WHERE ad.fixed_point_id IS NOT NULL
@@ -19,7 +19,7 @@ SearchDefinitions:
             AND pi.createdtime IN (
               SELECT MAX(wf.createdtime)
               FROM eg_wf_processinstance_v2 wf
-              WHERE wf.businessid = ad.booking_id
+              WHERE wf.businessid = ad.booking_no
               AND wf.businessservice = 'watertanker-fixedpoint'
               GROUP BY wf.businessid
             )
