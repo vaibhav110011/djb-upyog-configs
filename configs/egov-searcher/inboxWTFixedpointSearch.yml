@@ -1,0 +1,66 @@
+SearchDefinitions:
+  moduleName: request-service.water_tanker_fixedpoint
+  summary: Water Tanker Fixed Point Inbox API
+  version: 1.0.0
+
+  definitions:
+    - name: inboxWTFixedPointSearch
+      query:
+        baseQuery: |
+          SELECT row_to_json(result) FROM (
+            SELECT DISTINCT ad.booking_id, pi.createdtime
+            FROM upyog_rs_water_tanker_applicant_details ad
+            INNER JOIN eg_wf_processinstance_v2 pi 
+              ON pi.businessid = ad.booking_id
+            LEFT JOIN eg_wf_assignee_v2 assg 
+              ON pi.id = assg.processinstanceid
+            WHERE ad.fixed_point_id IS NOT NULL
+            $where
+            AND pi.createdtime IN (
+              SELECT MAX(wf.createdtime)
+              FROM eg_wf_processinstance_v2 wf
+              WHERE wf.businessid = ad.booking_id
+              AND wf.businessservice = 'watertanker-fixedpoint'
+              GROUP BY wf.businessid
+            )
+            ORDER BY pi.createdtime DESC $pagination
+          ) result
+
+      searchParams:
+        condition: AND
+        params:
+          - name: ad.booking_id
+            isMandatory: false
+            jsonPath: $.searchCriteria.bookingId
+
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+
+#          - name: pi.businessservice
+#            isMandatory: false
+#            jsonPath: $.searchCriteria.businessservice
+
+          #  DATE FILTER
+          - name: pi.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.fromDate
+            operator: ">="
+
+          - name: pi.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.toDate
+            operator: "<="
+
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+
+      output:
+        jsonFormat: {"ResponseInfo": {},"waterTankerBookingDetail": []}
+        outJsonPath: $.waterTankerBookingDetail
+        responseInfoPath: $.ResponseInfo
